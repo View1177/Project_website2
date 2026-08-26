@@ -35,10 +35,24 @@
     .nav-links a:hover { opacity:1; color:var(--lime); }
     .nav-quick { position:relative; display:flex; align-items:center; gap:7px; margin-left:-4px; padding-left:15px; }
     .nav-quick::before { content:""; width:1px; height:27px; position:absolute; left:0; background:linear-gradient(transparent,#ff9c48,transparent); }
-    .nav-links .nav-icon { display:grid; place-items:center; width:29px; height:29px; padding:0; border:1px solid rgba(255,255,255,.42); border-radius:50%; color:#fff; font-size:.7rem; font-weight:700; line-height:1; opacity:1; }
-    .nav-links .nav-icon:hover { transform:translateY(-2px); color:#fff; border-color:#ff8a32; background:#ff8a32; }
-    .nav-links .nav-facebook { font-size:1.2rem; font-family:Arial,sans-serif; font-weight:700; }
+    .nav-links .nav-icon { display:grid; place-items:center; width:29px; height:29px; padding:0; border:1px solid #ffffff6b; border-radius:50%; color:#fff; font-size:.7rem; font-weight:700; line-height:1; opacity:1; }
+    .nav-links .nav-icon:hover { transform:translateY(-2px); color:#5a1e1e; border-color:#ff8a32; background:#ff8a32; }
+    .nav-links .nav-line { color:#00c300; border-color:#00c300; }
+    .nav-links .nav-facebook { color:#1877f2; border-color:#1877f2; font-size:1.2rem; font-family:Arial,sans-serif; font-weight:700; }
+    .nav-links .nav-line:hover { color:#fff; border-color:#00c300; background:#00c300; }
+    .nav-links .nav-facebook:hover { color:#fff; border-color:#1877f2; background:#1877f2; }
     .nav-links .nav-phone { color:#ffae62; border-color:rgba(255,174,98,.75); font-size:1rem; }
+    .nav-links button.nav-icon { font-family:inherit; cursor:pointer; background:transparent; }
+    .nav-links .nav-copy-button.copied { color:#fff; border-color:#ea4335; background:#ea4335; }
+    .nav-links .nav-phone.nav-copy-button.copied { color:#211b16; border-color:#ffae62; background:#ffae62; }
+    .cursor-effect { position:fixed; z-index:100; top:0; left:0; width:34px; height:34px; border:1px solid rgba(255,190,120,.38); border-radius:50%; background:radial-gradient(circle,rgba(255,203,140,.17) 0,rgba(255,203,140,.04) 48%,transparent 70%); pointer-events:none; opacity:0; transform:translate(-50%,-50%) scale(.72); transition:opacity .45s ease,transform .6s ease; }
+    .cursor-effect.active { opacity:1; transform:translate(-50%,-50%) scale(1); }
+    @media (pointer:coarse),(prefers-reduced-motion:reduce) { .cursor-effect { display:none; } }
+    
+    /* --- ส่วนที่เพิ่มใหม่สำหรับ CSS ไอคอน Email --- */
+    .nav-links .nav-email { color:rgb(255, 0, 0); border-color:#810000; font-size:1.1rem; font-weight:400; }
+    /* ------------------------------------------- */
+
     .menu-button { display:none; border:0; background:transparent; color:white; font-size:1.5rem; cursor:pointer; }
 
     .hero { position:relative; min-height:780px; overflow:hidden; display:flex; align-items:center; color:white; background:#101719; isolation:isolate; }
@@ -118,35 +132,138 @@
     .project-info span { display:block; font-size:.7rem; color:var(--lime); letter-spacing:.1em; text-transform:uppercase; }
     .project-info strong { font-size:1rem; font-weight:600; }
     .portfolio-note { margin:24px 0 0; color:var(--muted); font-size:.86rem; }
+    .portfolio .section-head { margin-bottom:42px; }
+    .portfolio-slider { position:relative; overflow:hidden; isolation:isolate; background:#17130f; box-shadow:0 30px 70px rgba(43,30,17,.22); }
+    .portfolio-slider::after { content:""; position:absolute; z-index:2; inset:14px; border:1px solid rgba(255,255,255,.26); pointer-events:none; }
+    .slider-track { display:flex; transition:transform .75s cubic-bezier(.22,1,.36,1); will-change:transform; }
+    .project-slide { position:relative; flex:0 0 100%; height:clamp(430px,57vw,630px); overflow:hidden; color:#fff; cursor:zoom-in; }
+    .project-slide::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(8,7,5,.78) 0%,rgba(8,7,5,.26) 48%,rgba(8,7,5,.16) 100%),linear-gradient(0deg,rgba(8,7,5,.65),transparent 48%); }
+    .project-slide img { width:100%; height:100%; object-fit:cover; transition:transform 1.2s ease; }
+    .project-slide.is-active img { transform:scale(1.045); }
+    .slide-content { position:absolute; z-index:3; left:clamp(28px,6vw,84px); right:112px; bottom:clamp(34px,6vw,72px); max-width:540px; }
+    .slide-kicker { display:flex; align-items:center; gap:12px; margin-bottom:12px; color:#f5bc72; font-size:.73rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .slide-kicker::before { content:""; width:30px; height:1px; background:currentColor; }
+    .slide-content h3 { margin:0; font-size:clamp(2rem,4vw,4rem); line-height:1.05; letter-spacing:-.035em; }
+    .slide-content p { margin:14px 0 0; color:rgba(255,255,255,.83); font-size:1rem; }
+    .slider-arrow { position:absolute; z-index:4; top:50%; display:grid; place-items:center; width:54px; height:54px; border:1px solid rgba(255,255,255,.55); border-radius:50%; background:rgba(12,10,8,.42); color:#fff; font:300 2rem/1 Arial,sans-serif; cursor:pointer; transform:translateY(-50%); transition:background .25s, border-color .25s, transform .25s; }
+    .slider-arrow:hover { border-color:#f5bc72; background:#d88938; transform:translateY(-50%) scale(1.08); }
+    .slider-arrow.prev { left:26px; }
+    .slider-arrow.next { right:26px; }
+    .slider-footer { position:absolute; z-index:4; right:34px; bottom:30px; display:flex; align-items:center; gap:18px; color:rgba(255,255,255,.8); }
+    .slide-counter { font-size:.8rem; font-weight:700; letter-spacing:.12em; }
+    .slider-dots { display:flex; gap:7px; }
+    .slider-dot { width:20px; height:3px; padding:0; border:0; background:rgba(255,255,255,.4); cursor:pointer; transition:width .25s, background .25s; }
+    .slider-dot.is-active { width:42px; background:#f5bc72; }
+    @media (max-width:760px) { .portfolio .section-head { margin-bottom:28px; } .project-slide { height:500px; } .slide-content { right:28px; bottom:70px; } .slide-content p { font-size:.9rem; } .slider-arrow { top:auto; bottom:22px; width:42px; height:42px; font-size:1.55rem; transform:none; } .slider-arrow:hover { transform:scale(1.06); } .slider-arrow.prev { left:28px; } .slider-arrow.next { left:80px; right:auto; } .slider-footer { right:28px; bottom:35px; } .slider-dots { display:none; } }
 
     .contact { padding:102px 0 0; background:linear-gradient(90deg,rgba(42,31,20,.89),rgba(57,39,22,.72)),url('assets/theme-3.png') center/cover; color:white; }
     .contact-grid { padding-bottom:92px; }
     .contact-title { margin:0 0 24px; padding-bottom:17px; border-bottom:2px solid rgba(216,123,35,.65); color:#ff7a1a; font-size:clamp(2.2rem,4vw,3.25rem); letter-spacing:-.02em; line-height:1.15; }
-    .contact-options { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
-    .contact-link { min-height:296px; padding:35px 24px 28px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:13px; border:1px solid rgba(255,255,255,.25); border-radius:13px; background:rgba(255,250,242,.13); transition:.2s; }
-    .contact-link:hover { border-color:#ffb15f; background:rgba(255,250,242,.2); transform:translateY(-6px); }
+    
+    .contact-options { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+    .contact-link.email .contact-icon { color:#ea4335; border-color:#ea4335; font-size:2rem; }
+    
+    .contact-link { position:relative; z-index:1; min-height:296px; padding:35px 24px 28px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:13px; border:1px solid rgba(255,255,255,.25); border-radius:13px; background:rgba(255,250,242,.13); cursor:pointer; pointer-events:auto; touch-action:manipulation; transition:.2s; }
+    .contact-link:hover,.contact-link:focus-visible { border-color:#ffb15f; background:rgba(255,250,242,.2); transform:translateY(-6px); outline:2px solid rgba(255,177,95,.7); outline-offset:3px; }
     .contact-icon { display:grid; place-items:center; flex:0 0 80px; width:80px; height:80px; color:#ff7a1a; border:1px solid #ff7a1a; background:transparent; border-radius:50%; font-size:2.1rem; font-weight:800; }
     .contact-link.line .contact-icon { color:#00c300; border-color:#00c300; font-size:1.45rem; }
     .contact-link.facebook .contact-icon { color:#1877f2; border-color:#1877f2; font-size:2.6rem; }
+    .contact-link.phone .contact-icon { color:#ff7a1a; border-color:#ff7a1a; }
+    .contact-link.email .contact-icon { color:#ea4335; border-color:#ea4335; }
+    a.contact-icon { text-decoration:none; transition:transform .2s, background .2s; }
+    a.contact-icon:hover { color:#fff; transform:scale(1.06); }
+    .contact-link.phone a.contact-icon:hover { background:#ff7a1a; }
+    .contact-link.email a.contact-icon:hover { background:#ea4335; }
     .contact-link .kind { display:block; color:#fff; font-size:1.22rem; font-weight:700; }
     .contact-link .detail { display:block; color:#fff; font-size:1rem; font-weight:500; line-height:1.65; text-shadow:0 1px 5px rgba(0,0,0,.38); }
+    .contact-action-row { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:5px; }
+    .contact-action-link { color:#fff; text-decoration:none; font-weight:500; }
+    .contact-action-link:hover { color:#ffcf9a; }
+    .copy-button { display:inline-grid; place-items:center; width:28px; height:28px; padding:0; border:1px solid rgba(255,255,255,.48); border-radius:50%; color:#fff; background:rgba(0,0,0,.18); cursor:pointer; font-size:1rem; transition:.2s; }
+    .copy-button:hover,.copy-button.copied { color:#211b16; border-color:#f5bc72; background:#f5bc72; }
+    .copy-button.copied { width:auto; padding:0 10px; border-radius:14px; font-size:.72rem; }
     
-    /* CSS กล่องที่อยู่ (เพิ่มใหม่) */
     .location-card { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-bottom:40px; padding:35px 40px; background:rgba(255,250,242,.13); border:1px solid rgba(255,255,255,.25); border-radius:13px; }
     .location-info { flex:1; min-width:280px; }
+    .location-card { position:relative; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:28px; overflow:hidden; margin-bottom:40px; padding:35px 40px; background:linear-gradient(115deg,rgba(255,250,242,.19),rgba(255,250,242,.08)); border:1px solid rgba(255,255,255,.27); border-radius:13px; }
+    .location-card::after { content:""; position:absolute; right:-60px; bottom:-95px; width:280px; height:280px; border:1px solid rgba(255,187,107,.25); border-radius:50%; box-shadow:0 0 0 32px rgba(255,187,107,.045),0 0 0 65px rgba(255,187,107,.03); pointer-events:none; }
+    .location-info { position:relative; z-index:1; flex:1; min-width:280px; }
     .location-info h3 { margin:0 0 10px; color:#ffb15f; font-size:1.35rem; font-weight:600; }
     .location-info p { margin:0; font-size:1.05rem; line-height:1.6; color:rgba(255,255,255,.9); }
+    .map-button { position:relative; z-index:1; display:flex; align-items:center; gap:12px; min-width:236px; padding:9px 13px 9px 10px; border:1px solid rgba(255,220,175,.78); border-radius:8px; background:linear-gradient(135deg,#ffcb8c,#df8440); box-shadow:0 14px 28px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.42); color:#2a1a0d; text-decoration:none; transition:transform .25s,box-shadow .25s,filter .25s; }
+    .map-button:hover { color:#21130a; filter:brightness(1.06); transform:translateY(-4px); box-shadow:0 20px 35px rgba(0,0,0,.33),inset 0 1px 0 rgba(255,255,255,.48); }
+    .map-icon { display:grid; place-items:center; flex:0 0 45px; width:45px; height:45px; border-radius:6px; background:rgba(255,255,255,.34); }
+    .map-icon svg { width:25px; height:25px; }
+    .map-button-copy { display:grid; gap:1px; flex:1; }
+    .map-button-copy small { font-size:.62rem; font-weight:800; letter-spacing:.13em; }
+    .map-button-copy strong { font-size:1rem; }
+    .map-button-arrow { font-size:1.35rem; line-height:1; transition:transform .2s; }
+    .map-button:hover .map-button-arrow { transform:translate(2px,-2px); }
 
     .footer { padding:22px 0; border-top:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.82); font-size:.79rem; font-weight:400; }
     .footer-inner { display:flex; justify-content:space-between; gap:20px; }
 
     .lightbox { position:fixed; z-index:50; inset:0; display:none; align-items:center; justify-content:center; padding:25px; background:rgba(4,10,11,.92); }
     .lightbox.open { display:flex; }
-    .lightbox img { max-width:min(100%,920px); max-height:85vh; box-shadow:0 24px 80px rgba(0,0,0,.5); }
-    .lightbox button { position:absolute; top:17px; right:24px; border:0; color:white; background:transparent; font-size:2rem; cursor:pointer; }
+    .lightbox-dialog { position:relative; width:min(100%,1180px); max-height:92vh; display:grid; grid-template-rows:minmax(0,1fr) auto; gap:14px; }
+    .lightbox-figure { min-height:0; margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#0b0b0a; }
+    .lightbox img { display:block; max-width:100%; max-height:72vh; object-fit:contain; box-shadow:0 24px 80px rgba(0,0,0,.5); }
+    .lightbox-close,.gallery-arrow { position:absolute; z-index:2; display:grid; place-items:center; width:48px; height:48px; border:1px solid rgba(255,255,255,.5); border-radius:50%; color:white; background:rgba(0,0,0,.35); font-size:2rem; cursor:pointer; transition:.2s; }
+    .lightbox-close { top:18px; right:18px; }
+    .gallery-arrow { top:calc(50% - 36px); }
+    .gallery-arrow.prev { left:18px; }
+    .gallery-arrow.next { right:18px; }
+    .lightbox-close:hover,.gallery-arrow:hover { border-color:#f5bc72; background:#d88938; }
+    .lightbox-meta { display:flex; align-items:center; justify-content:space-between; gap:18px; color:#fff; }
+    .lightbox-caption { font-size:1rem; font-weight:600; }
+    .gallery-count { color:#f5bc72; font-size:.82rem; font-weight:700; letter-spacing:.1em; white-space:nowrap; }
+    .gallery-thumbs { display:flex; gap:8px; overflow:auto; padding:1px; }
+    .gallery-thumb { flex:0 0 68px; height:48px; padding:0; border:1px solid transparent; background:#16130f; cursor:pointer; opacity:.55; transition:.2s; }
+    .gallery-thumb img { width:100%; height:100%; object-fit:cover; }
+    .gallery-thumb.is-active { border-color:#f5bc72; opacity:1; }
+    @media (max-width:760px) { .lightbox { padding:14px; } .lightbox-dialog { width:100%; } .lightbox img { max-height:65vh; } .lightbox-close { top:10px; right:10px; } .gallery-arrow { top:calc(50% - 28px); width:42px; height:42px; font-size:1.6rem; } .gallery-arrow.prev { left:10px; } .gallery-arrow.next { right:10px; } .lightbox-meta { align-items:flex-start; flex-direction:column; gap:7px; } .gallery-thumbs { max-width:100%; } }
     .section-head h2,.about-title { color:var(--ink); }
     .section-head p,.service p,.value span,.portfolio-note { color:var(--muted); }
     .eyebrow { color:#d4a266; }
+
+    /* =========================================
+       CSS สำหรับส่วน ติดต่อ และ นามบัตร (ปรับปรุงใหม่)
+       ========================================= */
+    .contact-bottom-wrapper {
+      display: flex;
+      gap: 30px;
+      align-items: stretch;
+    }
+    .contact-bottom-wrapper .contact-options {
+      flex: 1; /* ให้กริดปุ่มติดต่อขยายเต็มพื้นที่ฝั่งซ้าย */
+    }
+    .business-card-wrapper {
+      flex: 0 0 320px; /* ล็อกขนาดนามบัตรฝั่งขวา */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .business-card-wrapper img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: transform 0.3s ease;
+    }
+    .business-card-wrapper img:hover {
+      transform: translateY(-5px) scale(1.02); 
+    }
+
+    @media (max-width:992px) {
+      .contact-bottom-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+      .business-card-wrapper {
+        margin-top: 10px;
+      }
+    }
 
     @media (max-width:760px) {
       .shell,.hero-content { width:min(100% - 32px,1180px); }
@@ -180,56 +297,41 @@
       .contact-grid { padding-bottom:60px; }
       .contact-options { grid-template-columns:1fr; gap:14px; }
       .contact-link { min-height:190px; }
-      
-      /* CSS กล่องที่อยู่ (มือถือ) */
       .location-card { padding:25px; flex-direction:column; align-items:flex-start; margin-bottom:30px; }
-
       .footer-inner { display:block; }
       .footer-inner span { display:block; margin-bottom:5px; }
     }
-    /* =========================================
-       CSS สำหรับรูปอาคารหน้าหลัก (มุมขวา)
-       ========================================= */
-    .hero-content { 
-      position: relative; 
-      z-index: 2; 
-    }
     
-    .hero-building-wrapper {
-      position: absolute;
-      right: -2%;
-      bottom: 0;
-      width: 58%; 
-      max-width: 880px;
-      z-index: 1;
-      pointer-events: none; 
-      animation: fadeSlideUp 1.2s ease-out forwards;
+    .hero-content { position: relative; z-index: 2; }
+    .hero-building-wrapper { position: absolute; right: -2%; bottom: 0; width: 58%; max-width: 880px; z-index: 1; pointer-events: none; animation: fadeSlideUp 1.2s ease-out forwards; }
+    .hero-building-wrapper img { width: 100%; height: auto; display: block; filter: drop-shadow(-20px 25px 45px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 25px rgba(255, 138, 50, 0.15)); -webkit-mask-image: linear-gradient(to top, transparent 2%, black 20%); mask-image: linear-gradient(to top, transparent 2%, black 20%); }
+
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(40px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (max-width: 1024px) { .hero-building-wrapper { width: 75%; opacity: 0.6; right: -15%; } }
+    @media (max-width: 760px) { .hero-building-wrapper { width: 120%; right: -30%; bottom: 5%; opacity: 0.15; } }
+    /* =========================================
+       CSS สำหรับ Cursor Trail Effect (2 วินาทีหาย)
+       ========================================= */
+    .cursor-trail {
+      position: fixed;
+      pointer-events: none; /* เพื่อไม่ให้เอฟเฟกต์บังการคลิก */
+      z-index: 9999;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 138, 50, 0.5); /* สีส้มอ่อนๆ แบบโปร่งแสง */
+      transform: translate(-50%, -50%);
+      animation: fadeTrail 2s ease-out forwards; /* ตั้งเวลา 2 วินาที */
     }
 
-    .hero-building-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: drop-shadow(-20px 25px 45px rgba(0, 0, 0, 0.8)) 
-              drop-shadow(0 0 25px rgba(255, 138, 50, 0.15));
-      -webkit-mask-image: linear-gradient(to top, transparent 2%, black 20%);
-      mask-image: linear-gradient(to top, transparent 2%, black 20%);
-    }
-
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(40px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @media (max-width: 1024px) {
-      .hero-building-wrapper { width: 75%; opacity: 0.6; right: -15%; }
-    }
-    @media (max-width: 760px) {
-      .hero-building-wrapper { 
-        width: 120%; 
-        right: -30%; 
-        bottom: 5%; 
-        opacity: 0.15; 
+    @keyframes fadeTrail {
+      0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
       }
     }
   </style>
@@ -241,7 +343,16 @@
       <button class="menu-button" type="button" aria-label="เปิดเมนู" aria-expanded="false">☰</button>
       <nav class="nav-links" aria-label="เมนูหลัก">
         <a href="#home">หน้าหลัก</a><a href="#about">เกี่ยวกับเรา</a><a href="#portfolio">ผลงาน</a><a href="#contact">ติดต่อเรา</a>
-        <span class="nav-quick" aria-label="ช่องทางติดต่อด่วน"><a class="nav-icon nav-line" href="https://line.me/ti/p/~pramsak44" target="_blank" rel="noopener" aria-label="ติดต่อผ่าน Line">LINE</a><a class="nav-icon nav-facebook" href="https://www.facebook.com/share/g/1EdAHE4YFQ/" target="_blank" rel="noopener" aria-label="ติดต่อผ่าน Facebook">f</a><a class="nav-icon nav-phone" href="tel:0863398016" aria-label="โทร 086-339-8016">☎</a></span>
+        
+        <!-- --- ส่วนที่เพิ่มใหม่สำหรับ HTML ไอคอน Email ในแถบเมนู --- -->
+        <span class="nav-quick" aria-label="ช่องทางติดต่อด่วน">
+          <a class="nav-icon nav-line" href="https://line.me/ti/p/~pramsak44" target="_blank" rel="noopener" aria-label="ติดต่อผ่าน Line">LINE</a>
+          <a class="nav-icon nav-facebook" href="https://www.facebook.com/share/g/1EdAHE4YFQ/" target="_blank" rel="noopener" aria-label="ติดต่อผ่าน Facebook">f</a>
+          <button class="nav-icon nav-phone nav-copy-button" type="button" data-copy="086-339-8016" aria-label="คัดลอกเบอร์ 086-339-8016">☎</button>
+          <button class="nav-icon nav-email nav-copy-button" type="button" data-copy="Pramsak44@gmail.com" aria-label="คัดลอกอีเมล Pramsak44@gmail.com">✉</button>
+        </span>
+        <!-- ---------------------------------------------------- -->
+
       </nav>
     </div>
   </header>
@@ -255,11 +366,9 @@
         <div class="actions"><a class="button primary" href="#portfolio">ชมผลงานของเรา <span aria-hidden="true">↗</span></a><a class="button outline" href="#contact">ปรึกษาโครงการ</a></div>
       </div>
       
-      <!-- เริ่ม: รูปภาพอาคารหน้าหลัก (มุมขวา) -->
       <div class="hero-building-wrapper">
         <img src="assets/sk company.png" alt="สำนักงาน บริษัท เอส เค อลูมิเนียม">
       </div>
-      <!-- จบ: รูปภาพอาคารหน้าหลัก -->
 
       <div class="hero-meta"><span><strong>10+ ปี</strong>ประสบการณ์</span><span><strong>ครบวงจร</strong>ออกแบบถึงติดตั้ง</span></div>
       <div class="hero-graphic" aria-hidden="true"></div>
@@ -306,29 +415,40 @@
     </section>
 
     <section class="portfolio shell" id="portfolio">
-      <div class="section-head"><div><div class="eyebrow">Selected works</div><h2>ผลงานที่สะท้อน<br>ความเชี่ยวชาญ</h2></div><div class="portfolio-controls" aria-label="กรองผลงาน"><button class="filter active" data-filter="all">ทั้งหมด</button><button class="filter" data-filter="commercial">อาคารพาณิชย์</button><button class="filter" data-filter="showroom">โชว์รูม</button><button class="filter" data-filter="retail">ค้าปลีก</button><button class="filter" data-filter="office">สำนักงาน</button></div></div>
-      <div class="project-grid">
-        <a class="project" data-type="retail" href="assets/project-03.jpg"><img src="assets/project-03.jpg" alt="โครงการ Chic Republic"><span class="project-info"><span>Retail</span><strong>Chic Republic</strong></span></a>
-        <a class="project" data-type="showroom" href="assets/project-07.jpg"><img src="assets/project-07.jpg" alt="Yamaha Premium Service Shop"><span class="project-info"><span>Showroom</span><strong>Yamaha Premium Service Shop</strong></span></a>
-        <a class="project" data-type="showroom" href="assets/project-09.jpg"><img src="assets/project-09.jpg" alt="Fuso BKK"><span class="project-info"><span>Showroom</span><strong>Fuso BKK</strong></span></a>
-        <a class="project" data-type="showroom" href="assets/project-10.jpg"><img src="assets/project-10.jpg" alt="Nissan BKK"><span class="project-info"><span>Showroom</span><strong>Nissan BKK</strong></span></a>
-        <a class="project" data-type="retail" href="assets/project-12.jpg"><img src="assets/project-12.jpg" alt="Decathlon สาขาบางใหญ่"><span class="project-info"><span>Retail</span><strong>Decathlon</strong></span></a>
-        <a class="project" data-type="commercial" href="assets/project-16.jpg"><img src="assets/project-16.jpg" alt="สำนักงานให้เช่า Benz BKK"><span class="project-info"><span>Commercial</span><strong>Benz BKK</strong></span></a>
-        <a class="project" data-type="office" href="assets/project-17.jpg"><img src="assets/project-17.jpg" alt="โครงการคลินิกพีเอ็นเอส"><span class="project-info"><span>Office</span><strong>อาคารสำนักงาน</strong></span></a>
-        <a class="project" data-type="commercial" href="assets/project-19.jpg"><img src="assets/project-19.jpg" alt="โครงการ Sunstar"><span class="project-info"><span>Commercial</span><strong>Sunstar</strong></span></a>
-        <a class="project" data-type="office" href="assets/project-20.jpg"><img src="assets/project-20.jpg" alt="อาคารสำนักงาน"><span class="project-info"><span>Office</span><strong>อาคารสำนักงานร่วมสมัย</strong></span></a>
-        <a class="project" data-type="commercial" href="assets/project-21.jpg"><img src="assets/project-21.jpg" alt="โครงการ FASCINO"><span class="project-info"><span>Commercial</span><strong>FASCINO</strong></span></a>
-        <a class="project" data-type="showroom" href="assets/project-25.jpg"><img src="assets/project-25.jpg" alt="Ford BKK"><span class="project-info"><span>Showroom</span><strong>Ford BKK</strong></span></a>
-        <a class="project" data-type="office" href="assets/project-27.jpg"><img src="assets/project-27.jpg" alt="อาคารสำนักงาน TPS"><span class="project-info"><span>Office</span><strong>อาคารสำนักงาน TPS</strong></span></a>
+      <div class="section-head"><div><div class="eyebrow">Selected works</div><h2>ผลงานที่สะท้อน<br>ความเชี่ยวชาญ</h2></div><p>คัดสรรผลงานที่สะท้อนความละเอียดของวัสดุ งานออกแบบ และมาตรฐานการติดตั้งของเรา</p></div>
+      <div class="portfolio-slider" aria-roledescription="carousel" aria-label="ผลงานของ เอส เค อลูมิเนียม">
+        <div class="slider-track">
+          <article class="project-slide is-active" data-gallery="assets/project-c01.jpg|assets/project-c02.jpg|assets/project-c03.jpg"><img src="assets/project-c01.jpg" alt="อาคารฟาซาดสีเขียว"><div class="slide-content"><div class="slide-kicker">Facade · 3 Photos</div><h3>อาคารฟาซาด<br>สีเขียว</h3><p>รายละเอียดงานอลูมิเนียมคอมโพสิต โครงสร้าง และฝ้าใต้กันสาดของโครงการเดียวกัน</p></div></article>
+          <article class="project-slide" data-gallery="assets/project-d01.jpg|assets/project-d02.jpg"><img src="assets/project-d01.jpg" alt="ศูนย์ปฏิบัติการระบบไฟฟ้าเสนา"><div class="slide-content"><div class="slide-kicker">Commercial · 2 Photos</div><h3>ศูนย์ปฏิบัติการ<br>ระบบไฟฟ้าเสนา</h3><p>งานฟาซาดอาคารที่เน้นรูปทรงร่วมสมัย ความคมของเส้น และงานติดตั้งที่แม่นยำ</p></div></article>
+          <article class="project-slide"><img src="assets/project-e01.jpg" alt="งานฟาซาดแผงซ้อน"><div class="slide-content"><div class="slide-kicker">Facade</div><h3>ฟาซาดแผงซ้อน</h3><p>มิติของผิวอาคารที่เรียงตัวอย่างมีจังหวะ สร้างเอกลักษณ์ให้กับด้านหน้าอาคาร</p></div></article>
+          <article class="project-slide"><img src="assets/project-f01.jpg" alt="โรงจอดรถลายไม้"><div class="slide-content"><div class="slide-kicker">Interior · Canopy</div><h3>โรงจอดรถ<br>ลายไม้</h3><p>งานฝ้าและผิววัสดุลายไม้ที่ให้บรรยากาศอบอุ่น พร้อมความทนทานในการใช้งาน</p></div></article>
+          <article class="project-slide" data-gallery="assets/project-g01.jpg|assets/project-g02.jpg|assets/project-g03.jpg|assets/project-g04.jpg|assets/project-g05.jpg"><img src="assets/project-g03.jpg" alt="อาคารฟาซาดลวดลายสามเหลี่ยม"><div class="slide-content"><div class="slide-kicker">Feature Facade · 5 Photos</div><h3>อาคารฟาซาด<br>ลวดลายสามเหลี่ยม</h3><p>งานฟาซาดสีส้มที่ออกแบบลวดลายและมิติให้เป็นจุดเด่นของสถาปัตยกรรม</p></div></article>
+          <article class="project-slide"><img src="assets/project-h01.jpg" alt="อาคาร The Origin"><div class="slide-content"><div class="slide-kicker">Commercial</div><h3>อาคาร<br>The Origin</h3><p>ตัวอย่างรายละเอียดงานภายนอกที่ต่อเนื่องและกลมกลืนตลอดทั้งโครงการ</p></div></article>
+          <article class="project-slide"><img src="assets/project-i01.jpg" alt="โครงการ ซี ดี ซี ติดตั้งโดยบริษัท เอส เค อลูมิเนียม"><div class="slide-content"><div class="slide-kicker">Office</div><h3>โครงการ<br>ซี ดี ซี</h3><p>งานติดตั้งผิวอาคารที่สร้างเส้นสายเรียบคมและภาพลักษณ์ทันสมัย</p></div></article>
+          <article class="project-slide is-active"><img src="assets/project-03.jpg" alt="โครงการ Chic Republic"><div class="slide-content"><div class="slide-kicker">Retail</div><h3>Chic Republic</h3><p>พื้นที่ค้าปลีกที่ออกแบบรายละเอียดให้ดูโดดเด่นและกลมกลืนกับสถาปัตยกรรม</p></div></article>
+          <article class="project-slide"><img src="assets/project-07.jpg" alt="Yamaha Premium Service Shop"><div class="slide-content"><div class="slide-kicker">Showroom</div><h3>Yamaha Premium<br>Service Shop</h3><p>งานฟาซาดที่ช่วยถ่ายทอดภาพลักษณ์พรีเมียมของแบรนด์ได้อย่างชัดเจน</p></div></article>
+          <article class="project-slide"><img src="assets/project-09.jpg" alt="Fuso BKK"><div class="slide-content"><div class="slide-kicker">Showroom</div><h3>Fuso BKK</h3><p>ผิวอาคารที่แข็งแรง เนี้ยบ และตอบโจทย์การใช้งานของโชว์รูมรถยนต์</p></div></article>
+          <article class="project-slide"><img src="assets/project-10.jpg" alt="Nissan BKK"><div class="slide-content"><div class="slide-kicker">Showroom</div><h3>Nissan BKK</h3><p>การติดตั้งที่ใส่ใจในทุกมิติ เพื่อให้ภาพรวมของอาคารดูสมบูรณ์แบบ</p></div></article>
+          <article class="project-slide"><img src="assets/project-12.jpg" alt="Decathlon สาขาบางใหญ่"><div class="slide-content"><div class="slide-kicker">Retail</div><h3>Decathlon</h3><p>งานภายนอกสำหรับพื้นที่ค้าปลีกขนาดใหญ่ ที่เน้นความทนทานและเป็นเอกลักษณ์</p></div></article>
+          <article class="project-slide"><img src="assets/project-16.jpg" alt="สำนักงานให้เช่า Benz BKK"><div class="slide-content"><div class="slide-kicker">Commercial</div><h3>Benz BKK</h3><p>งานฟาซาดเชิงพาณิชย์ที่ผสานความงามและความแม่นยำในการผลิต</p></div></article>
+          <article class="project-slide"><img src="assets/project-17.jpg" alt="โครงการคลินิกพีเอ็นเอส"><div class="slide-content"><div class="slide-kicker">Office</div><h3>อาคารสำนักงาน</h3><p>รายละเอียดร่วมสมัยที่ช่วยยกระดับภาพลักษณ์ของพื้นที่ทำงาน</p></div></article>
+          <article class="project-slide"><img src="assets/project-19.jpg" alt="โครงการ Sunstar"><div class="slide-content"><div class="slide-kicker">Commercial</div><h3>Sunstar</h3><p>งานติดตั้งที่รักษาความคมชัดของเส้นสายและวัสดุในทุกมุมมอง</p></div></article>
+          <article class="project-slide"><img src="assets/project-20.jpg" alt="อาคารสำนักงานร่วมสมัย"><div class="slide-content"><div class="slide-kicker">Office</div><h3>อาคารสำนักงาน<br>ร่วมสมัย</h3><p>ความเรียบหรูที่สะท้อนคุณภาพของชิ้นงานและความเชี่ยวชาญของทีมติดตั้ง</p></div></article>
+          <article class="project-slide"><img src="assets/project-21.jpg" alt="โครงการ FASCINO"><div class="slide-content"><div class="slide-kicker">Commercial</div><h3>FASCINO</h3><p>ผิวอาคารที่มีเอกลักษณ์ พร้อมมาตรฐานการประกอบและติดตั้งที่ไว้ใจได้</p></div></article>
+          <article class="project-slide"><img src="assets/project-25.jpg" alt="Ford BKK"><div class="slide-content"><div class="slide-kicker">Showroom</div><h3>Ford BKK</h3><p>งานโชว์รูมที่เน้นความแข็งแรง สง่างาม และสอดคล้องกับแบรนด์</p></div></article>
+          <article class="project-slide"><img src="assets/project-27.jpg" alt="อาคารสำนักงาน TPS"><div class="slide-content"><div class="slide-kicker">Office</div><h3>อาคารสำนักงาน TPS</h3><p>งานสถาปัตยกรรมที่ถ่ายทอดความน่าเชื่อถือผ่านรายละเอียดที่ประณีต</p></div></article>
+        </div>
+        <button class="slider-arrow prev" type="button" aria-label="ดูผลงานก่อนหน้า">‹</button>
+        <button class="slider-arrow next" type="button" aria-label="ดูผลงานถัดไป">›</button>
+        <div class="slider-footer"><span class="slide-counter" aria-live="polite">01 / 19</span><div class="slider-dots" aria-label="เลือกสไลด์"></div></div>
       </div>
-      <p class="portfolio-note">คลิกที่ผลงานเพื่อดูภาพขยาย · ภาพทั้งหมดคัดจาก Company Profile ของบริษัท</p>
+      <p class="portfolio-note">ใช้ปุ่มซ้าย–ขวาเพื่อเลือกชมผลงานแต่ละโครงการ</p>
     </section>
 
     <section class="contact" id="contact">
       <div class="shell contact-grid">
         <h2 class="contact-title">ช่องทางการติดต่อ</h2>
         
-        <!-- เริ่ม: ส่วนแสดงที่อยู่และแผนที่ (เพิ่มใหม่) -->
         <div class="location-card">
           <div class="location-info">
             <h3>ที่ตั้งบริษัท</h3>
@@ -339,32 +459,249 @@
             </p>
           </div>
           <a href="https://maps.app.goo.gl/N24xiT9JGHpFa4iSA" target="_blank" rel="noopener" class="button primary">ดูแผนที่ Google Maps <span aria-hidden="true">📍</span></a>
+          <a href="https://maps.app.goo.gl/N24xiT9JGHpFa4iSA" target="_blank" rel="noopener" class="map-button" aria-label="เปิดที่ตั้งบริษัทใน Google Maps">
+            <span class="map-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 10.1C20 15.5 12 21 12 21S4 15.5 4 10.1a8 8 0 1 1 16 0Z" fill="#E74C3C" stroke="#7E261C" stroke-width="1.1"/><circle cx="12" cy="10" r="2.7" fill="#fff"/></svg></span>
+            <span class="map-button-copy"><small>OPEN LOCATION</small><strong>Google Maps</strong></span>
+            <span class="map-button-arrow" aria-hidden="true">↗</span>
+          </a>
         </div>
-        <!-- จบ: ส่วนแสดงที่อยู่และแผนที่ -->
 
-        <div class="contact-options">
-          <a class="contact-link line" href="https://line.me/ti/p/~pramsak44" target="_blank" rel="noopener"><span class="contact-icon">LINE</span><span><span class="kind">LINE Official</span><span class="detail">ID: pramsak44<br>ปรึกษาและประเมินราคาฟรี</span></span></a>
-          <a class="contact-link facebook" href="https://www.facebook.com/share/g/1EdAHE4YFQ/" target="_blank" rel="noopener"><span class="contact-icon">f</span><span><span class="kind">Facebook Page</span><span class="detail">เอส เค อลูมิเนียม<br>ติดตามผลงานล่าสุดของเรา</span></span></a>
-          <a class="contact-link" href="tel:0863398016"><span class="contact-icon">☎</span><span><span class="kind">โทรศัพท์ติดต่อ</span><span class="detail">086-339-8016<br>086-770-1957</span></span></a>
+        <!-- เริ่ม: รวมกล่องปุ่มติดต่อและนามบัตร -->
+        <div class="contact-bottom-wrapper">
+          
+          <div class="contact-options">
+            <a class="contact-link line" href="https://line.me/ti/p/~pramsak44" target="_blank" rel="noopener"><span class="contact-icon">LINE</span><span><span class="kind">LINE Official</span><span class="detail">ID: pramsak44<br>ปรึกษาและประเมินราคาฟรี</span></span></a>
+            <a class="contact-link facebook" href="https://www.facebook.com/share/g/1EdAHE4YFQ/" target="_blank" rel="noopener"><span class="contact-icon">f</span><span><span class="kind">Facebook Page</span><span class="detail">เอส เค อลูมิเนียม<br>ติดตามผลงานล่าสุดของเรา</span></span></a>
+            <div class="contact-link phone"><a class="contact-icon" href="tel:0863398016" aria-label="โทร 086-339-8016">☎</a><span><span class="kind">โทรศัพท์ติดต่อ</span><span class="detail"><span class="contact-action-row"><a class="contact-action-link" href="tel:0863398016">086-339-8016</a><button class="copy-button" type="button" data-copy="086-339-8016" aria-label="คัดลอกเบอร์ 086-339-8016">⧉</button></span><span class="contact-action-row"><a class="contact-action-link" href="tel:0867701957">086-770-1957</a><button class="copy-button" type="button" data-copy="086-770-1957" aria-label="คัดลอกเบอร์ 086-770-1957">⧉</button></span></span></span></div>
+            <div class="contact-link email"><a class="contact-icon" href="mailto:Pramsak44@gmail.com" aria-label="ส่งอีเมลถึง Pramsak44@gmail.com">✉</a><span><span class="kind">Email</span><span class="detail"><span class="contact-action-row"><a class="contact-action-link" href="mailto:Pramsak44@gmail.com">Pramsak44@gmail.com</a><button class="copy-button" type="button" data-copy="Pramsak44@gmail.com" aria-label="คัดลอกอีเมล">⧉</button></span><span>ส่งรายละเอียดและแบบแปลน</span></span></span></div>
+          </div>
+
+          <!-- กล่องนามบัตร ย้ายมาไว้ขวามือ -->
+          <div class="business-card-wrapper">
+            <img src="assets/card.jpg" alt="นามบัตร คุณเปรมศักดิ์ ปิละใบ">
+          </div>
+
         </div>
+        <!-- จบ: รวมกล่องปุ่มติดต่อและนามบัตร -->
+
       </div>
-      <footer class="footer"><div class="shell footer-inner"><span>© <span id="year"></span> บริษัท เอส เค อลูมิเนียม จำกัด</span><span>Aluminium Composite · Glass · Aluminium</span></div></footer>
+      <footer class="footer"><div class="shell footer-inner"><span>© <span id="year">2026</span> บริษัท เอส เค อลูมิเนียม จำกัด</span><span>Aluminium Composite · Glass · Aluminium</span></div></footer>
     </section>
   </main>
-  <div class="lightbox" aria-hidden="true"><button type="button" aria-label="ปิดภาพ">×</button><img src="" alt="ภาพผลงานขยาย"></div>
+  <div class="lightbox" aria-hidden="true">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="แกลเลอรีผลงาน">
+      <button class="lightbox-close" type="button" aria-label="ปิดภาพ">×</button>
+      <button class="gallery-arrow prev" type="button" aria-label="ดูภาพก่อนหน้า">‹</button>
+      <figure class="lightbox-figure"><img src="" alt="ภาพผลงานขยาย"></figure>
+      <button class="gallery-arrow next" type="button" aria-label="ดูภาพถัดไป">›</button>
+      <div class="lightbox-meta"><span class="lightbox-caption"></span><span class="gallery-count"></span></div>
+      <div class="gallery-thumbs" aria-label="เลือกภาพในโครงการ"></div>
+    </div>
+  </div>
   <script>
-    const nav=document.querySelector('.nav'),menu=document.querySelector('.menu-button'),links=document.querySelector('.nav-links');
-    addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>25));
-    menu.addEventListener('click',()=>{const state=links.classList.toggle('open');menu.setAttribute('aria-expanded',state);});
-    links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-    const projects=[...document.querySelectorAll('.project')];
-    document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{document.querySelector('.filter.active').classList.remove('active');button.classList.add('active');projects.forEach(p=>p.classList.toggle('is-hidden',button.dataset.filter!=='all'&&p.dataset.type!==button.dataset.filter));}));
-    const lightbox=document.querySelector('.lightbox'),lightboxImage=lightbox.querySelector('img');
-    projects.forEach(project=>project.addEventListener('click',event=>{event.preventDefault();lightboxImage.src=project.href;lightboxImage.alt=project.querySelector('img').alt;lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');}));
-    function closeLightbox(){lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');}
-    lightbox.addEventListener('click',event=>{if(event.target===lightbox||event.target.tagName==='BUTTON')closeLightbox();});
-    addEventListener('keydown',event=>{if(event.key==='Escape')closeLightbox();});
-    document.querySelector('#year').textContent=new Date().getFullYear()+543;
+    const nav = document.querySelector('.nav');
+    const menu = document.querySelector('.menu-button');
+    const links = document.querySelector('.nav-links');
+    
+    // เติมส่วนสคริปต์ที่โดนตัดขาดให้สมบูรณ์
+    addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+    menu.addEventListener('click', () => links.classList.toggle('open'));
+
+    if (matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const cursorEffect = document.createElement('span');
+      cursorEffect.className = 'cursor-effect';
+      document.body.append(cursorEffect);
+      let cursorEffectTimer;
+      addEventListener('pointermove', (event) => {
+        if (event.pointerType && event.pointerType !== 'mouse') return;
+        cursorEffect.style.left = `${event.clientX}px`;
+        cursorEffect.style.top = `${event.clientY}px`;
+        cursorEffect.classList.add('active');
+        clearTimeout(cursorEffectTimer);
+        cursorEffectTimer = setTimeout(() => cursorEffect.classList.remove('active'), 2000);
+      }, { passive:true });
+    }
+
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImage = lightbox?.querySelector('img');
+    const closeLightboxButton = lightbox?.querySelector('.lightbox-close');
+    const galleryPrevious = lightbox?.querySelector('.gallery-arrow.prev');
+    const galleryNext = lightbox?.querySelector('.gallery-arrow.next');
+    const galleryCaption = lightbox?.querySelector('.lightbox-caption');
+    const galleryCount = lightbox?.querySelector('.gallery-count');
+    const galleryThumbs = lightbox?.querySelector('.gallery-thumbs');
+    let galleryImages = [];
+    let galleryTitle = '';
+    let activeGalleryImage = 0;
+
+    const closeLightbox = () => {
+      lightbox?.classList.remove('open');
+      lightbox?.setAttribute('aria-hidden', 'true');
+      if (lightboxImage) lightboxImage.src = '';
+    };
+
+    const showGalleryImage = (index) => {
+      if (!galleryImages.length || !lightboxImage) return;
+      activeGalleryImage = (index + galleryImages.length) % galleryImages.length;
+      lightboxImage.src = galleryImages[activeGalleryImage];
+      lightboxImage.alt = `${galleryTitle} ภาพที่ ${activeGalleryImage + 1}`;
+      if (galleryCaption) galleryCaption.textContent = galleryTitle;
+      if (galleryCount) galleryCount.textContent = `${String(activeGalleryImage + 1).padStart(2, '0')} / ${String(galleryImages.length).padStart(2, '0')}`;
+      [...(galleryThumbs?.children || [])].forEach((thumb, thumbIndex) => thumb.classList.toggle('is-active', thumbIndex === activeGalleryImage));
+    };
+
+    const openGallery = (slide) => {
+      if (!lightbox || !lightboxImage) return;
+      const image = slide.querySelector('img');
+      galleryTitle = slide.querySelector('h3')?.textContent.replace(/\s+/g, ' ').trim() || image.alt;
+      galleryImages = [...new Set((slide.dataset.gallery || image.getAttribute('src')).split('|'))];
+      activeGalleryImage = 0;
+      if (galleryThumbs) {
+        galleryThumbs.replaceChildren();
+        galleryImages.forEach((source, index) => {
+          const thumb = document.createElement('button');
+          const thumbImage = document.createElement('img');
+          thumb.className = 'gallery-thumb';
+          thumb.type = 'button';
+          thumb.setAttribute('aria-label', `ดูภาพที่ ${index + 1}`);
+          thumbImage.src = source;
+          thumbImage.alt = '';
+          thumb.append(thumbImage);
+          thumb.addEventListener('click', () => showGalleryImage(index));
+          galleryThumbs.append(thumb);
+        });
+      }
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      showGalleryImage(0);
+      closeLightboxButton?.focus();
+    };
+    closeLightboxButton?.addEventListener('click', closeLightbox);
+    lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+    galleryPrevious?.addEventListener('click', () => showGalleryImage(activeGalleryImage - 1));
+    galleryNext?.addEventListener('click', () => showGalleryImage(activeGalleryImage + 1));
+    addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeLightbox();
+      if (lightbox?.classList.contains('open') && event.key === 'ArrowLeft') showGalleryImage(activeGalleryImage - 1);
+      if (lightbox?.classList.contains('open') && event.key === 'ArrowRight') showGalleryImage(activeGalleryImage + 1);
+    });
+
+    const copyText = async (value) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+        return;
+      }
+      const temporaryField = document.createElement('textarea');
+      temporaryField.value = value;
+      temporaryField.setAttribute('readonly', '');
+      temporaryField.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+      document.body.append(temporaryField);
+      temporaryField.select();
+      const copied = document.execCommand('copy');
+      temporaryField.remove();
+      if (!copied) throw new Error('Copy command failed');
+    };
+    document.querySelectorAll('.copy-button, .nav-copy-button').forEach((button) => {
+      const icon = button.textContent;
+      const originalLabel = button.getAttribute('aria-label');
+      const isNavigationButton = button.classList.contains('nav-copy-button');
+      button.addEventListener('click', async () => {
+        try {
+          await copyText(button.dataset.copy);
+          button.textContent = isNavigationButton ? '✓' : 'คัดลอกแล้ว';
+          button.classList.add('copied');
+          button.setAttribute('aria-label', `คัดลอกแล้ว: ${button.dataset.copy}`);
+          setTimeout(() => {
+            button.textContent = icon;
+            button.classList.remove('copied');
+            button.setAttribute('aria-label', originalLabel);
+          }, 1600);
+        } catch {
+          button.textContent = isNavigationButton ? '!' : 'ไม่สำเร็จ';
+          setTimeout(() => { button.textContent = icon; }, 1600);
+        }
+      });
+    });
+
+    const portfolioSlider = document.querySelector('.portfolio-slider');
+    if (portfolioSlider) {
+      const track = portfolioSlider.querySelector('.slider-track');
+      const slides = [...portfolioSlider.querySelectorAll('.project-slide')];
+      const previous = portfolioSlider.querySelector('.slider-arrow.prev');
+      const next = portfolioSlider.querySelector('.slider-arrow.next');
+      const counter = portfolioSlider.querySelector('.slide-counter');
+      const dots = portfolioSlider.querySelector('.slider-dots');
+      let activeSlide = 0;
+      let touchStartX = 0;
+
+      slides.forEach((slide, index) => {
+        const image = slide.querySelector('img');
+        slide.tabIndex = 0;
+        slide.setAttribute('role', 'button');
+        slide.setAttribute('aria-label', `เปิดภาพขนาดใหญ่: ${image.alt}`);
+        slide.addEventListener('click', () => openGallery(slide));
+        slide.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openGallery(slide);
+          }
+        });
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `ดูผลงานลำดับที่ ${index + 1}`);
+        dot.addEventListener('click', () => showSlide(index));
+        dots.append(dot);
+      });
+
+      const showSlide = (index) => {
+        activeSlide = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${activeSlide * 100}%)`;
+        slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === activeSlide));
+        [...dots.children].forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === activeSlide));
+        counter.textContent = `${String(activeSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      };
+
+      previous.addEventListener('click', () => showSlide(activeSlide - 1));
+      next.addEventListener('click', () => showSlide(activeSlide + 1));
+      portfolioSlider.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') showSlide(activeSlide - 1);
+        if (event.key === 'ArrowRight') showSlide(activeSlide + 1);
+      });
+      portfolioSlider.addEventListener('touchstart', (event) => { touchStartX = event.changedTouches[0].screenX; }, { passive:true });
+      portfolioSlider.addEventListener('touchend', (event) => {
+        const distance = event.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(distance) > 45) showSlide(activeSlide + (distance < 0 ? 1 : -1));
+      }, { passive:true });
+      showSlide(0);
+    }
+    // =========================================
+    // Javascript สำหรับ Cursor Trail Effect
+    // =========================================
+    let lastTrailTime = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      
+      // สร้างจุดใหม่ทุกๆ 40ms เพื่อไม่ให้กินสเปคเครื่องมากเกินไป
+      if (now - lastTrailTime > 40) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        
+        // กำหนดตำแหน่งให้อยู่ตรงปลายเมาส์
+        trail.style.left = e.clientX + 'px';
+        trail.style.top = e.clientY + 'px';
+        
+        document.body.appendChild(trail);
+
+        // สั่งลบจุดนี้ทิ้งหลังจากผ่านไป 2 วินาที (2000 มิลลิวินาที)
+        setTimeout(() => {
+          trail.remove();
+        }, 2000);
+
+        lastTrailTime = now;
+      }
+    });
   </script>
 </body>
 </html>
